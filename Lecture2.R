@@ -1,5 +1,4 @@
-#Lecture 2_Notes
-# Date: 08/2/2025
+#Lecture 2: Introduction to R [08/26/25]
 
 ##package dependencies
 tools::package_dependencies("ggplot2")
