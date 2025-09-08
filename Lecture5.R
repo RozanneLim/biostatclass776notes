@@ -16,8 +16,8 @@
 #| label: plot1b
 #| height: 4
 #| width: 5
-#| eval: FALSE
-#| echo: TRUE
+#| eval: FALSE #eval false means the code won't be run
+#| echo: TRUE #echo true means you show the code chunk
 data(airquality)
 plot(airquality$Ozone ~ airquality$Wind)
 `
