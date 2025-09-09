@@ -80,3 +80,19 @@ chicago <- mutate(
 )
 head(chicago)
 
+#transmute function only keeps the new variables that you create
+head(transmute(chicago,
+    pm10detrend = pm10tmean2 - mean(pm10tmean2, na.rm = TRUE),
+    o3detrend = o3tmean2 - mean(o3tmean2, na.rm = TRUE)
+))
+
+#group_by() function 
+#used to generate summary statistics from the data frame within strata defined by a variable
+
+#slice() function
+#slice_sample() function of the dplyr package will allow you to see a sample of random rows in random order
+#slice_head() function will show you the first n rows of a data frame
+#slice_tail() function will show you the last n rows of a data frame
+
+
+

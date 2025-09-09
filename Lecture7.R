@@ -75,32 +75,32 @@ kable()
 
 #skipping comments in the file
 read_csv(
-    "The first line of metadata
+  "The first line of metadata
   The second line of metadata
   x,y,z
   1,2,3",
-    skip = 2
+  skip = 2
 )
 
 read_csv(
-    "# A comment I want to skip
+  "# A comment I want to skip
   x,y,z
   1,2,3",
-    comment = "#"
+  comment = "#"
 )
 
 #specifying column types explicitly
 teams <- read_csv(
-    here("data", "team_standings.csv"),
-    col_types = "cc" #c stands for character, and there's two columns
+  here("data", "team_standings.csv"),
+  col_types = "cc" #c stands for character, and there's two columns
 )
 
 #more specific column types using column_only function
 
 logdates <- read_csv(
-    here("data", "2016-07-19.csv.bz2"),
-    col_types = cols_only(date = col_date()),
-    n_max = 10
+  here("data", "2016-07-19.csv.bz2"),
+  col_types = cols_only(date = col_date()),
+  n_max = 10
 )
 logdates
 
