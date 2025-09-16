@@ -106,3 +106,43 @@ typeof(4) #double
 typeof(4L) #integer
 
 Inf #infinity
+
+NaN #not a number
+
+#When different objects are mixed in a vector, coercion occurs so that every element in the vector is of the same class.
+
+#explicit coercion
+as.integer()
+as.factor()
+
+#matrix
+#The dimension attribute is itself an integer vector of length 2 (number of rows, number of columns)
+m <- matrix(nrow = 2, ncol = 3)
+m
+attributes(m) #shows what the dimensios are
+
+#cbind() and rbind()
+#cbind binds the values vertically [side by side], rbind() binds values horizontally [stacked]
+#dimnames and rows and columns
+
+#factors
+#Factors are used to represent categorical data and can be unordered or ordered.
+#One can think of a factor as an integer vector where each integer has a label.
+#create using a factor() function
+x <- factor(c("yes", "yes", "no", "yes", "no"))
+x
+table(x)
+table(x, useNA = "ifany") #detecting NAs
+
+#see the underlying representation of factor
+unclass(x)
+
+#Often factors will be automatically created for you when you read in a dataset using a function like:
+read.table()
+
+#creating a dataframe
+data.frame()
+row.names() #special attribute that provides the names of the rows
+
+#converting data frames to matrix
+data.matrix()
