@@ -1,0 +1,75 @@
+---
+title: "Lecture 14: Functions in R"
+format: html
+author: "Rozanne Lim"
+Date: 09/18/25
+---
+# Functions
+
+Functions are often used to encapsulate a sequence of expressions that need to be executed numerous times, perhaps under slightly different conditions.
+Also, functions are also often written when code must be shared with others or the public.
+
+In particular, functions are R objects of class function.
+
+Here’s a simple function that takes no arguments and does nothing.
+```{r}
+f <- function() {
+  ## This is an empty function
+}
+
+## Functions have their own class
+class(f)
+
+## Execute this function
+f()
+```
+
+Example: 
+```{r}
+f <- function() {
+  # this is the function body
+  hello <- "Hello, world!\n"
+  cat(hello)
+}
+f()
+```
+
+cat() is useful and preferable to print() in several settings. One reason is that it doesn’t output new lines (i.e. \n).
+
+hello <- "Hello, world!\n"
+> print(hello)
+[1] "Hello, world!\n"
+> cat(hello)
+Hello, world!
+
+This function prints Hello World with the specified number of times 
+```{r}
+f <- function(num) {
+  for (i in seq_len(num)) {
+    hello <- "Hello, world!\n"
+    cat(hello)
+  }
+}
+f(3)
+```
+
+There is a return() function that can be used to return an explicitly value from a function, but it is rarely used in R (we will discuss it a bit later in this lesson).
+
+Any function argument can have a default value, if you wish to specify it.
+
+Example
+
+```{r}
+f <- function(num = 1) {
+  hello <- "Hello, world!\n"
+  for (i in seq_len(num)) {
+    cat(hello)
+  }
+  chars <- nchar(hello) * num
+  chars
+}
+
+
+f() ## Use default value for 'num'
+```
+

@@ -1,0 +1,58 @@
+---
+title: "Lecture 13: Control Structures"
+format: html
+author: "Rozanne Lim"
+---
+
+**Commonly used control structures are**
+- if and else: testing a condition and acting on it
+- for: execute a loop a fixed number of times
+- while: execute a loop while a condition is true
+- repeat: execute an infinite loop (must break out of it to stop)
+- break: break the execution of a loop
+- next: skip an interation of a loop
+
+**if else example**
+```{r}
+if (<condition1>) {
+    ## do something
+} else if (<condition2>)  {
+    ## do something different
+} else {
+    ## do something entirely different
+}
+```
+
+**another way of writing**
+```{r}
+y <- if (x > 3) {
+    10
+} else {
+    0
+}
+
+y
+```
+
+**Practice Question**
+Let’s use the palmerpenguins dataset and write a if-else statement that
+1. Randomly samples a value from a standard normal distribution (Hint: check out the rnorm(n, mean = 0, sd = 1) function in base R).
+2. If the value is larger than 0, use dplyr functions to keep only the Chinstrap penguins.
+3. Otherwise, keep only the Gentoo penguins.
+4. Re-run the code 10 times and look at the output.
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+penguins <- penguins
+
+x <- rnorm(1, mean = 0, sd = 1)
+if (x > 0){
+    penguins %>%
+        filter(species == "Chinstrap") 
+} else {
+    penguins %>%
+        filter(species == "Gentoo")
+}
+
+```
