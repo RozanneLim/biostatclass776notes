@@ -1,0 +1,23 @@
+---
+title: "Lecture 17: Vectorization and Loop Functionals"
+format: html
+author: "Rozanne Lim"
+---
+## Base R Plots
+
+# lapply()
+The lapply() function does the following simple series of operations:
+1. it loops over a list, iterating over each element in that list
+2. it applies a function to each element of the list (a function that you specify) and returns a list (the l in lapply() is for “list”).
+
+```{r}
+#Example
+x <- list(a = 1:5, b = rnorm(10))
+lapply(x, mean)
+```
+
+# sapply() 
+
+```{r}
+
+```

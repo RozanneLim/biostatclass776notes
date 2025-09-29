@@ -111,8 +111,17 @@ Let’s use the palmerpenguins dataset. Here are the tasks:
 5. If they are numeric, compute the column mean. Otherwise, report a NA.
 
 ```{r}
-for i in seq_along(penguins){
-
+library(dplyr)
+for (i in seq_along(penguins)){
+    col_name <- names(penguins)[i]
+    col_values <- pull(penguins, col_name)
+    
+    if (is.numeric(col_values)) {
+        col_mean <- mean(col_values, na.rm = TRUE)
+        print(col_mean)
+    } else {
+        print(paste("Column", col_name, "is not numeric. Returning NA."))
+    }
 }
 ```
 

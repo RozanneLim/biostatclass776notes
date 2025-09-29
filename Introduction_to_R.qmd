@@ -1,7 +1,0 @@
----
-title: "Lecture 2: Introduction to R"
-format: html
-author: "Rozanne Lim" 
-date: 08/26/25
----
-

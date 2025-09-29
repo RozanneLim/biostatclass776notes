@@ -5,14 +5,35 @@ author: "Rozanne Lim"
 date: 08/26/25
 ---
 
-##package dependencies
+# Installing and loading R packages 
+
+```{r}
+install.packages()
+```
+
+To see what other packages are required by ggplot2 
+```{r}
 tools::package_dependencies("ggplot2")
+```
 
-##installing packages from github, need to install remotes package first
-##remotes::install_github()
+Use the remotes package to install packages from GitHub
+```{r}
+remotes::install_github()
+```
 
-##cloning repository from github
+Once packages are installed, they do not have to be re-installed. They do, however, need to be loaded in to each new R session.
+
+```{r}
+library() 
+```
+
+
+## cloning repository from github
+
+```{r}
 git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
+
 
 ## in terminal: repo new working directory, list the files, read the README file, show the remote URL
 cd myrepo
