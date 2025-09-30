@@ -1,11 +1,12 @@
 ---
-title: "Lecture 2: Introduction to R"
+title: "Introduction to R and GitHub (Lectures 2 and 3)"
 format: html
 author: "Rozanne Lim" 
 date: 08/26/25
 ---
+# Introduction to R
 
-# Installing and loading R packages 
+## Installing and loading R packages 
 
 ```{r}
 install.packages()
@@ -25,6 +26,38 @@ Once packages are installed, they do not have to be re-installed. They do, howev
 
 ```{r}
 library() 
+```
+
+# Introduction to git/GitHub 
+
+Git is what is called a version control system for file management. The main idea is that as you (and your collaborators) work on a project, the software tracks, and records any changes made by anyone.
+
+## Making a git repository 
+
+```{r}
+#this code checks if usethis is installed, installs it if it is not present in the workspace
+if (!requireNamespace("usethis", quietly = TRUE)) {
+    install.packages("usethis")
+}
+
+#creates an R Project 
+usethis::create_project("~/Desktop/biostat776classnotes")
+
+#creates a GitHub Repository 
+usethis::use_git()
+
+#starts pushing and pulling from GitHub 
+usethis::use_github()
+```
+
+## Reproducing code and errors
+
+```{r}
+#Installs reprex package 
+install.packages("reprex")
+
+#run this code after your code, to reproduce the example with the error 
+reprex::reprex() 
 ```
 
 
@@ -48,16 +81,7 @@ git status
 ##rewriting credentials
 gitcreds::gitcreds_set()
 
-##code for creating a new R project and pushing it to github
-if (!requireNamespace("usethis", quietly = TRUE)) {
-  install.packages("usethis")
-}
 
-usethis::create_project("~/Desktop/biostat776classnotes")
-
-## Then in your new RStudio project, run the following:
-usethis::use_git()
-usethis::use_github()
 
 ##reproducable code example
 install.packages("reprex")

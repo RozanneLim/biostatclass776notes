@@ -1,0 +1,137 @@
+---
+title: "Working with dates and times"
+format: html
+embed-resources: TRUE
+author: "Rozanne Lim"
+---
+
+# Dates and Times
+R has developed a special representation of dates and times
+• Dates are represented by the Date class
+• Times are represented by the POSIXct or the POSIXlt class
+
+## Lubridate
+• It largely replaces the default date/time functions in base R
+• It contains methods for date/time arithmetic
+• It handles time zones, leap year, leap seconds, etc.
+
+```{r}
+library("tidyverse")
+library("lubridate")
+```
+
+## Creating dates and times
+There are three types of date/time data that refer to an instant in time:
+1. A date. Tibbles print this as <date>.
+2. A time within a day. Tibbles print this as <time>.
+3. A date-time is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as <dttm>. Elsewhere in R these are called POSIXct.
+
+```{r}
+#get the current date
+today()
+#gets current date and time
+now()
+#base R get current date
+base::Sys.Date()
+#base R get current date and time
+base::Sys.time()
+```
+
+## Typical ways dates and times are created in R
+1. From a string
+2. From individual date-time components
+3. From an existing date/time object
+
+**From a string**
+Dates can be coerced from a character strings using some helper functions from lubridate. They automatically work out the format once you specify the order of the component.
+
+```{r}
+ymd("1970-01-01")
+mdy("January 31st, 2017")
+dmy("31-Jan-2017")
+
+#Base R versions
+as.Date("1970-01-01")
+as.Date("January 31st, 2017", "%B %dst, %Y")
+as.Date(gsub("st,", "", "January 31st, 2017"), "%B %d %Y") #need to strip the "st"
+```
+
+
+```{r}
+#More than one date!
+x <- c(
+  "2016-04-05",
+  "2016/05/06",
+  "2016,10,4"
+)
+ymd(x)
+```
+
+**From individual time-date components**
+
+Example 1: 
+```{r}
+library("nycflights13")
+
+flights %>%
+  select(year, month, day)
+```
+
+Using make_date()
+```{r}
+flights %>%
+  select(year, month, day) %>%
+  mutate(departure = make_date(year, month, day))
+```
+
+Using make_datetime()
+```{r}
+flights %>%
+  select(year, month, day, hour, minute) %>%
+  mutate(departure = make_datetime(year, month, day, hour, minute))
+```
+
+**From other types**
+You may want to switch between a date-time and a date.
+That is the job of as_datetime() and as_date():
+
+Examples: 
+```{r}
+today()
+#switching to date-time
+as_datetime(today())
+
+
+now()
+#switching to date
+as_date(now())
+```
+
+## Date-Times in R
+
+To create a date-time from a character string, add an underscore and one or more of “h”, “m”, and “s” to the name of the parsing function:
+Times can be coerced from a character string with ymd_hms()
+ 
+ Examples:
+ ```{r}
+ymd_hms("2017-01-31 20:11:59")
+mdy_hm("01/31/2017 08:01")
+ ```
+
+ Specifying a timezone: 
+ ```{r}
+ymd_hms("2016-09-13 14:00:00")
+ymd_hms("2016-09-13 14:00:00", tz = "America/New_York")
+ymd_hms("2016-09-13 14:00:00", tz = "")
+ ```
+
+ ## POSIXct or the POSIXlt class
+
+POSIXct is just a very large integer under the hood. It is a useful class when you want to store times in something like a data frame.
+
+ ```{r}
+x <- ymd_hm("1970-01-01 01:00")
+class(x)
+ ```
+
+ 
