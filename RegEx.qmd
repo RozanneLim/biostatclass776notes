@@ -1,0 +1,74 @@
+---
+title: "RegEx"
+format: html
+embed-resources: TRUE
+---
+
+A regular expression (also known as a “regex” or “regexp”) is a concise language for describing patterns in character strings.
+
+RegEx can be used for:
+1. Searching for a pattern or string within another string (e.g searching for the string “a” in the string “Maryland”)
+2. Replacing one part of a string with another string (e.g replacing the string “t” with “p” in the string “hot” where you are changing the string “hot” to “hop”)
+
+## repetition
+
+You can specify a regular expression that contains a certain number of characters or metacharacters using the enumeration metacharacters (or sometimes called quantifiers).
+
++: indicates that one or more of the preceding expression should be present (or matches at least 1 time)
+*: indicates that zero or more of the preceding expression is present (or matches at least 0 times)
+?: indicates that zero or 1 of the preceding expression is not present or present at most 1 time (or matches between 0 and 1 times)
+
+Let’s practice a few out together. Make the following regular expressions for the character string “spookyhalloween”:
+1. Does “zz” appear 1 or more times?
+2. Does “ee” appear 1 or more times?
+3. Does “oo” appear 0 or more times?
+4. Does “ii” appear 0 or more times?
+
+```{r}
+grepl("(zz)+", "spookyhalloween")
+grepl("(ee)+", "spookyhalloween")
+grepl("(oo)*", "spookyhalloween")
+grepl("(ii)*", "spookyhalloween")
+```
+
+**Specify exact numbers of expressions**
+{n}: exactly n
+{n,}: n or more
+{,m}: at most m
+{n,m}: between n and m
+
+Example 1:
+```{r}
+# Does "Mississippi" contain exactly 2 adjacent "s" ?
+grepl("s{2}", "Mississippi")
+
+# This is equivalent to the expression above:
+grepl("ss", "Mississippi")
+```
+
+Example 2:
+```{r}
+# Does "Mississippi" contain between 1 and 3 adjacent "s" ?
+grepl("s{1,3}", "Mississippi")
+```
+
+Example 3: 
+```{r}
+# Does "Mississippi" contain between 2 and 3 adjacent "i" ?
+grepl("i{2,3}", "Mississippi")
+```
+
+Let’s practice a few out together. Make the following regular expressions for the character string “spookyspookyhalloweenspookyspookyhalloween”:
+
+Search for “spooky” exactly 2 times. What about 3 times?
+Search for “spooky” exactly 2 times followed by any character of length 9 (i.e. “halloween”).
+Same search as above, but search for that twice in a row.
+Same search as above, but search for that three times in a row.
+
+```{r}
+grepl("(spooky){2}", "spookyspookyhalloweenspookyspookyhalloween")
+grepl("(spooky){3}", "spookyspookyhalloweenspookyspookyhalloween")
+#search for spooky exactly 2 times followeed by any character of length 9
+grepl("(spooky){2}.{9}", "spookyspookyhalloweenspookyspookyhalloween")
+grepl("((spooky){2}){2}", "spookyspookyhalloweenspookyspookyhalloween")
+```

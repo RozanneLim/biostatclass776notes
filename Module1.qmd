@@ -1,0 +1,161 @@
+---
+title: "Introduction to R and Github"
+format: html
+author: "Rozanne Lim" 
+date: 08/26/25
+---
+# Content
+1. Lecture 1 - Course Introduction & Introduction to R and RStudio
+2. Lecture 2 - Introduction to git/github, Reproducible Research, Literate Programming
+
+# Lecture 1.1 Introduction to R
+
+## Installing and loading R packages 
+```{r}
+install.packages()
+```
+
+To see what other packages are required by ggplot2 
+```{r}
+tools::package_dependencies("ggplot2")
+```
+
+Use the remotes package to install packages from GitHub
+```{r}
+remotes::install_github()
+```
+
+Once packages are installed, they do not have to be re-installed. They do, however, need to be loaded in to each new R session.
+```{r}
+library() 
+```
+
+# Lecture 2.1 Introduction to git/GitHub 
+Git is what is called a version control system for file management. The main idea is that as you (and your collaborators) work on a project, the software tracks, and records any changes made by anyone.
+
+## Making a git repository 
+```{r}
+#this code checks if usethis is installed, installs it if it is not present in the workspace
+if (!requireNamespace("usethis", quietly = TRUE)) {
+    install.packages("usethis")
+}
+
+#creates an R Project 
+usethis::create_project("~/Desktop/biostat776classnotes")
+
+#creates a GitHub Repository 
+usethis::use_git()
+
+#starts pushing and pulling from GitHub 
+usethis::use_github()
+```
+
+## Reproducing code and errors
+```{r}
+#Installs reprex package 
+install.packages("reprex")
+
+#run this code after your code, to reproduce the example with the error 
+reprex::reprex() 
+```
+
+## cloning repository from github
+```{r}
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
+
+# Lecture 2.2 Reproducible Research 
+Introduction to reproducible research covering some basic concepts and ideas that are related to reproducible reporting
+
+**Replication** - independent people to do independent things with different data, methods, and settings to see if they get the same result
+
+It can be challenging to do replication:
+- Issues of costs
+- Issues of time 
+- Unique studies 
+
+**Reproducibility** - data and code are re-analyzed by independent scientists to obtain the same results of the original investigator
+
+Types of reproducibilty: 
+1. Computational reproductibility - detailed information about code, software, hardware and implementation details
+
+Requires: 
+- Analytic data
+- Analytic code
+- Documentation
+- Distribution
+
+2. Empirical reproducibility - detailed information provided about non-computational empirical scientific experiments and observations 
+3. Statistical reproducibility - detailed information about the choice of statistical tests, model parameters, and threshold values 
+
+## R Packages for Promoting Reproducibility
+
+```{r}
+install.packages(c("here", "sessioninfo"))
+```
+
+**Here**
+- Makes it easy to share code by avoiding full file paths and making it easier to use relative file paths 
+
+```{r}
+## This is my relative directory
+here::here()
+here::here("data", "flights.csv")
+```
+
+**SessionInfo**
+Allows you to share details about the R packages you are using for a particular script.
+
+```{r}
+options(width = 120)
+sessioninfo::session_info()
+#first section includes information about R installation and other computer environment variables 
+#second section includes information about the R packages used, version numebrs and installation source
+```
+
+# Lecture 2.3 Literate Statistical Programming 
+
+Idea is to think of a report or a publication as a stream of text and code. 
+- Text is readable by people and code is readable by computers
+- Analysis is described in a series of text and code chunks
+- Each kind of code chunk will do something like load some data or compute some results
+- Each text chunk will relay in a human readable language
+- May include presentation code that formats table and figures 
+
+## Weaving and tangling
+- Weaving --> producing human readable documents like PDFs or HTML web pages
+- Tangled --> producing machine-readable documents/code 
+
+## Creating websites and books in R Markdown
+- Blogdown
+- Bookdown 
+- Quarto 
+
+## Hosting a website on GitHub Pages
+
+```{r}
+## Create a project directory
+usethis::create_project("~/Desktop/StatComputing_ProjectX")
+
+## Start using git to version control your project
+usethis::use_git()
+
+## Set the default branch to gh-pages (special name for GitHub Pages)
+usethis::git_default_branch_rename(to = "gh-pages")
+
+## Create a .nojekyll file
+writeLines("", here::here(".nojekyll"))
+
+## Create the repository on GitHub
+usethis::use_github()
+
+## Create an index.Rmd (or index.qmd) file
+## Knit / Render the file to create index.html
+## Make a commit and push all files to GitHub
+```
+
+
+
+
+
+
